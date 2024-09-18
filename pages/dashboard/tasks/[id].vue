@@ -1,19 +1,38 @@
 <script lang="ts" setup>
+import { Trash2 } from 'lucide-vue-next'
 import { useDashboardStore } from '@/store/dashboardStore'
+import { useToast } from '@/components/ui/toast/use-toast'
 import type { ITask } from '@/types'
 
 const route = useRoute()
+
+const { toast } = useToast()
 const dashboardStore = useDashboardStore()
 // @ts-ignore
 const task = computed<ITask>(() => dashboardStore.getTask(route.params.id))
+
+const deleteTask = () => {
+	toast({
+		title: 'delete',
+		description: `task ${task.value.title}`,
+	})
+	// @ts-ignore
+	dashboardStore.deleteTask(route.params.id!)
+	navigateTo('/dashboard')
+}
 </script>
 
 <template>
 	<div class="max-w-xl bg-gray-200 m-32 mx-auto py-4 rounded-lg px-4">
 		<form v-if="task" class="flex flex-col flex-grow items-start justify-between gap-2">
-			<h3 class="pb-4">
-				Edit task <span class="font-bold">{{ task.title }}</span>
-			</h3>
+			<div class="flex justify-between w-full">
+				<h3 class="pb-4">
+					Edit task <span class="font-bold">{{ task.title }}</span>
+				</h3>
+				<Button @click="deleteTask" type="button" variant="outline" size="icon">
+					<Trash2 color="red" :size="12" />
+				</Button>
+			</div>
 			<div class="grid w-full items-center gap-1.5">
 				<Label class="text-gray-600" for="title">Title</Label>
 				<Input id="title" v-model="task.title" />
