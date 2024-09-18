@@ -1,6 +1,11 @@
 <script lang="ts" setup>
-import { TriangleAlert, ChartNoAxesColumnDecreasing, CircleUserRound } from 'lucide-vue-next'
-import { useDashboardStore } from '@/store/dashboardStore'
+import {
+	TriangleAlert,
+	ChartNoAxesColumnDecreasing,
+	CircleUserRound,
+	UserCog,
+} from 'lucide-vue-next'
+
 import type { ITask } from '@/types'
 
 interface IProps {
@@ -24,10 +29,15 @@ defineProps<IProps>()
 				</div>
 				<p class="text-xs pt-1">{{ task.description }}</p>
 
-				<TriangleAlert v-if="task.priority === 'alert'" color="orange" :size="16" />
-				<div class="flex items-center gap-3 text-xs" v-else>
-					<ChartNoAxesColumnDecreasing :size="16" />
-					<span class="text-gray-400">{{ task.priority }}</span>
+				<div class="flex justify-between">
+					<TriangleAlert v-if="task.priority === 'alert'" color="orange" :size="16" />
+					<div class="flex items-center gap-3 text-xs" v-else>
+						<ChartNoAxesColumnDecreasing :size="16" />
+						<span class="text-gray-400">{{ task.priority }}</span>
+					</div>
+					<p class="text-xs text-gray-400 flex items-center gap-1" v-if="task.responsible">
+						<UserCog :size="16" /> {{ task.responsible }}
+					</p>
 				</div>
 			</CardContent>
 		</Card>
