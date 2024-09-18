@@ -7,12 +7,26 @@ export const useDragDashboard = () => {
 
 	const { toast } = useToast()
 
-	const pickupColumn = (event: any, fromColumnIndex: number) => {
+	/**
+	 *
+	 * @param event
+	 * @param fromColumnIndex
+	 * start moving the column
+	 */
+
+	const startMoveColumn = (event: any, fromColumnIndex: number) => {
 		event.dataTransfer.effectAllowed = 'move'
 		event.dataTransfer.dropEffect = 'move'
 		event.dataTransfer.setData('type', 'column')
 		event.dataTransfer.setData('from-column-index', fromColumnIndex)
 	}
+
+	/**
+	 *
+	 * @param event
+	 * @param param1
+	 * determine where the task or column was moved to
+	 */
 
 	const dropItem = (
 		event: any,
@@ -40,7 +54,14 @@ export const useDragDashboard = () => {
 		}
 	}
 
-	const pickupTask = (
+	/**
+	 *
+	 * @param event
+	 * @param param1
+	 * start moving the task
+	 */
+
+	const startMoveTask = (
 		event: any,
 		{ fromColumnIndex, fromTaskIndex }: { fromColumnIndex: number; fromTaskIndex: number }
 	) => {
@@ -51,6 +72,12 @@ export const useDragDashboard = () => {
 		event.dataTransfer.setData('from-task-index', fromTaskIndex)
 	}
 
+	/**
+	 *
+	 * @param index
+	 * delete column
+	 */
+
 	const deleteColumn = (index: number) => {
 		toast({
 			title: 'delete',
@@ -58,6 +85,12 @@ export const useDragDashboard = () => {
 		})
 		dashboardStore.deleteColumn(index)
 	}
+
+	/**
+	 *
+	 * @param index
+	 * creating a copy of the column
+	 */
 
 	const duplicateColumn = (index: number) => {
 		toast({
@@ -67,16 +100,21 @@ export const useDragDashboard = () => {
 		dashboardStore.duplicateColumn(index)
 	}
 
+	/**
+	 *
+	 * @param index
+	 * adding a task
+	 */
+
 	const addTask = (index: number) => {
 		dashboardStore.addTask(nameTask.value, index)
-
 		nameTask.value = ''
 	}
 
 	return {
-		pickupTask,
+		startMoveTask,
 		dropItem,
-		pickupColumn,
+		startMoveColumn,
 		dashboardStore,
 		deleteColumn,
 		duplicateColumn,

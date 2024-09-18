@@ -86,6 +86,8 @@ export const useDashboardStore = defineStore('dashboard', () => {
 		dashboard.value[toColumnIndex].tasks.splice(toTaskIndex, 0, task)
 	}
 
+	// functionality for working with users
+
 	const addUser = (name: string) => {
 		const isUser = users.value.includes(name)
 		if (!isUser) users.value.push(name)

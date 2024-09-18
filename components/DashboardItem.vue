@@ -11,8 +11,15 @@ defineProps<IProps>()
 const isEditStatus = ref(false)
 const router = useRouter()
 
-const { pickupColumn, dropItem, pickupTask, deleteColumn, duplicateColumn, addTask, nameTask } =
-	useDragDashboard()
+const {
+	startMoveColumn,
+	dropItem,
+	startMoveTask,
+	deleteColumn,
+	duplicateColumn,
+	addTask,
+	nameTask,
+} = useDragDashboard()
 
 const goToTask = (id: string) => router.push(`/dashboard/tasks/${id}`)
 </script>
@@ -21,7 +28,7 @@ const goToTask = (id: string) => router.push(`/dashboard/tasks/${id}`)
 	<div
 		class="flex flex-col p-3 rounded w-[280px] border bg-white"
 		draggable="true"
-		@dragstart.self="pickupColumn($event, columnIndex)"
+		@dragstart.self="startMoveColumn($event, columnIndex)"
 		@dragenter.prevent
 		@dragover.prevent
 		@drop.stop="dropItem($event, { toColumnIndex: columnIndex })"
@@ -44,7 +51,7 @@ const goToTask = (id: string) => router.push(`/dashboard/tasks/${id}`)
 				:taskIndex="taskIndex"
 				draggable="true"
 				@dragstart="
-					pickupTask($event, {
+					startMoveTask($event, {
 						fromColumnIndex: columnIndex,
 						fromTaskIndex: taskIndex,
 					})
