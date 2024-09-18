@@ -86,6 +86,11 @@ export const useDashboardStore = defineStore('dashboard', () => {
 		dashboard.value[toColumnIndex].tasks.splice(toTaskIndex, 0, task)
 	}
 
+	const addUser = (name: string) => {
+		const isUser = users.value.includes(name)
+		if (!isUser) users.value.push(name)
+	}
+
 	return {
 		dashboard,
 		getTask,
@@ -98,5 +103,6 @@ export const useDashboardStore = defineStore('dashboard', () => {
 		moveTask,
 		users,
 		priority,
+		addUser,
 	}
 })

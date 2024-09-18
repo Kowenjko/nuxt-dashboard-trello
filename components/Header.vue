@@ -1,4 +1,16 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { UserButton, useUser } from 'vue-clerk'
+import { useDashboardStore } from '@/store/dashboardStore'
+
+const { isSignedIn, user } = useUser()
+const dashboardStore = useDashboardStore()
+
+const goToSignIn = () => navigateTo('/sign-in')
+
+watch(user, (value) => {
+	if (value?.firstName) dashboardStore.addUser(value.firstName)
+})
+</script>
 
 <template>
 	<header class="border-b">
@@ -8,7 +20,10 @@
 				<span class="font-bold">Dashboard</span>
 			</nuxt-link>
 			<div class="">
-				<Button size="xs" class="text-xs" variant="outline">LogIn</Button>
+				<UserButton v-if="isSignedIn" after-sign-out-url="/" />
+				<Button v-else @click="goToSignIn" size="xs" class="text-xs" variant="outline"
+					>SignIn</Button
+				>
 			</div>
 		</div>
 	</header>

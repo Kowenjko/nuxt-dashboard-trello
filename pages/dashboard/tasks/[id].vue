@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Trash2 } from 'lucide-vue-next'
+import { Trash2, UserCog, CircleUserRound } from 'lucide-vue-next'
 import { useDashboardStore } from '@/store/dashboardStore'
 import { useToast } from '@/components/ui/toast/use-toast'
 import type { ITask } from '@/types'
@@ -43,34 +43,26 @@ const deleteTask = () => {
 			</div>
 			<div class="w-full flex gap-2">
 				<div class="flex-1">
-					<Label class="text-gray-600 block pb-2">Responsible</Label>
-					<Select v-model="task.responsible">
-						<SelectTrigger class="w-full">
-							<SelectValue placeholder="Select a responsible" />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectGroup>
-								<SelectItem :value="user" v-for="user in dashboardStore.users" :key="user">
-									{{ user }}
-								</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
+					<Label class="text-gray-600 flex items-center gap-1 pb-2">
+						<UserCog :size="16" /> Responsible</Label
+					>
+
+					<DefaultSelect
+						:options="dashboardStore.users"
+						v-model="task.responsible"
+						placeholder="Select a responsible"
+					/>
 				</div>
 				<div class="flex-1">
-					<Label class="text-gray-600 block pb-2">Member</Label>
-					<Select v-model="task.member">
-						<SelectTrigger class="w-full">
-							<SelectValue placeholder="Select a responsible" />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectGroup>
-								<SelectItem :value="user" v-for="user in dashboardStore.users" :key="user">
-									{{ user }}
-								</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
+					<Label class="text-gray-600 flex items-center gap-1 pb-2"
+						><CircleUserRound :size="16" /> Member</Label
+					>
+
+					<DefaultSelect
+						:options="dashboardStore.users"
+						v-model="task.member"
+						placeholder="Select a member"
+					/>
 				</div>
 			</div>
 			<div>

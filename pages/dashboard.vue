@@ -14,6 +14,13 @@ const addColumn = () => {
 	dashboardStore.addColumn(newColumnTitle.value)
 	newColumnTitle.value = ''
 }
+
+definePageMeta({
+	middleware: 'auth',
+	auth: {
+		guestRedirectUrl: '/sign-in',
+	},
+})
 </script>
 
 <template>

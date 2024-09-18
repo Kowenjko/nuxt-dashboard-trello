@@ -10,9 +10,19 @@ export default defineNuxtConfig({
 		'nuxt-typed-router',
 		'@nuxt/image',
 		'@vueuse/nuxt',
+		'vue-clerk/nuxt',
 	],
+	runtimeConfig: {
+		public: {
+			clerkPublishableKey: process.env.NUXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+		},
+		clerkSecretKey: process.env.NUXT_CLERK_SECRET_KEY,
+	},
 	shadcn: {
 		prefix: '',
 		componentDir: './components/ui',
+	},
+	clerk: {
+		appearance: { variables: { colorPrimary: '#570DF8' } },
 	},
 })
