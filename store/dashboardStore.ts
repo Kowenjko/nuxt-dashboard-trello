@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { dashboardData, usersData, priorityData } from '@/data'
 import { useStorage } from '@vueuse/core'
+import { deepCopyObj } from '@/helpers'
+
 import type { IColumn } from '@/types'
 
 // @ts-ignore
@@ -31,8 +33,10 @@ export const useDashboardStore = defineStore('dashboard', () => {
 
 	const deleteColumn = (index: number) => dashboard.value.splice(index, 1)
 
-	const duplicateColumn = (index: number) =>
-		dashboard.value.splice(index, 0, dashboard.value[index])
+	const duplicateColumn = (index: number) => {
+		const cloneArr = deepCopyObj(dashboard.value[index])
+		dashboard.value.splice(index, 0, cloneArr)
+	}
 
 	const moveColumn = ({
 		fromColumnIndex,
