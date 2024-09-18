@@ -39,7 +39,7 @@ export const dashboardData: IColumn[] = [
 	},
 	{
 		id: '3',
-		status: 'complete',
+		status: 'done',
 		tasks: [
 			{
 				id: '3-1',
