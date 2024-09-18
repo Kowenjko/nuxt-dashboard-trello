@@ -20,6 +20,11 @@ const deleteTask = () => {
 	dashboardStore.deleteTask(route.params.id!)
 	navigateTo('/dashboard')
 }
+
+useHead({
+	title: task.value.title,
+	meta: [{ name: 'description', content: task.value.description }],
+})
 </script>
 
 <template>

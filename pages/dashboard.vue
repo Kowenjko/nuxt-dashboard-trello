@@ -15,6 +15,11 @@ const addColumn = () => {
 	newColumnTitle.value = ''
 }
 
+useHead({
+	title: 'dashboard',
+	meta: [{ name: 'description', content: 'Test dashboard' }],
+})
+
 definePageMeta({
 	middleware: 'auth',
 	auth: {

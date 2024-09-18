@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 const goToDashboard = () => navigateTo('/dashboard')
+
+useHead({
+	title: 'home',
+	meta: [{ name: 'description', content: 'Test dashboard' }],
+})
 </script>
 
 <template>

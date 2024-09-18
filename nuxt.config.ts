@@ -23,6 +23,6 @@ export default defineNuxtConfig({
 		componentDir: './components/ui',
 	},
 	clerk: {
-		appearance: { variables: { colorPrimary: '#570DF8' } },
+		appearance: { variables: { colorPrimary: '#007ac2' } },
 	},
 })
