@@ -9,7 +9,6 @@ interface IProps {
 defineProps<IProps>()
 
 const isEditStatus = ref(false)
-const router = useRouter()
 
 const {
 	startMoveColumn,
@@ -21,7 +20,7 @@ const {
 	nameTask,
 } = useDragDashboard()
 
-const goToTask = (id: string) => router.push(`/dashboard/tasks/${id}`)
+const goToTask = (id: string) => navigateTo(`/dashboard/tasks/${id}`)
 </script>
 
 <template>

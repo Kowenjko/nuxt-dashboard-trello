@@ -47,7 +47,15 @@ useHead({
 			</div>
 			<div class="grid w-full items-center gap-1.5">
 				<Label class="text-gray-600" for="description">Description</Label>
-				<Textarea class="rounded" id="description" v-model="task.description" />
+				<!-- <Textarea class="rounded" id="description" v-model="task.description" /> -->
+				<ClientOnly>
+					<QuillEditor
+						v-model:content="task.description"
+						theme="snow"
+						toolbar="minimal"
+						content-type="text"
+					/>
+				</ClientOnly>
 			</div>
 			<div class="w-full flex gap-2">
 				<div class="flex-1">
@@ -97,3 +105,11 @@ useHead({
 		</div>
 	</div>
 </template>
+<style>
+.ql-container {
+	@apply h-32 rounded-b-lg shadow bg-white;
+}
+.ql-toolbar {
+	@apply rounded-t-lg bg-white;
+}
+</style>
